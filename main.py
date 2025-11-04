@@ -38,7 +38,7 @@ class BaimiaoOCR:
 
     def login(self):
         self.uuid = str(uuid.uuid4())
-        config.set('default', "uuid", self.uuid)
+        config.set('defaults', "uuid", self.uuid)
         self.headers["X-AUTH-UUID"] = self.uuid
 
         login_headers = self.headers.copy()
@@ -58,7 +58,7 @@ class BaimiaoOCR:
             result = response.json()
             if result.get('data', {}).get('token'):
                 self.login_token = result['data']['token']
-                config.set('default', "login_token", self.login_token)
+                config.set('defaults', "login_token", self.login_token)
                 self.headers["X-AUTH-TOKEN"] = self.login_token
             else:
                 raise Exception(json.dumps(result, ensure_ascii=False))
